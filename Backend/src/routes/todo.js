@@ -1,9 +1,10 @@
 const {Router} = require('express');
-const todolistCtrl = require('../controllers/todolist')
+const todolistCtrl = require('../controllers/todolist');
+const jwtcontroller = require('../controllers/jwt');
 const router = Router();
 
-router.get('/', todolistCtrl.getList);
+router.get('/', jwtcontroller.verifyToken ,todolistCtrl.getList);
 
-router.post('/', todolistCtrl.createList);
+router.post('/', jwtcontroller.verifyToken ,todolistCtrl.createList);
 
 module.exports = router;

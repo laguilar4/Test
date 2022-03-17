@@ -1,8 +1,9 @@
 const {Router} = require('express');
 const usercontroller = require('../controllers/user');
+const jwtcontroller = require('../controllers/jwt');
 const router = Router();
 
-router.get('/', usercontroller.getUser);
+router.get('/', jwtcontroller.verifyToken , usercontroller.getUser);
 
 router.post('/', usercontroller.createUser);
 
