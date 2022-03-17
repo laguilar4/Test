@@ -18,7 +18,7 @@ userCtrl.createUser = async (req,res) => {
 userCtrl.logUser = async (req, res) =>
 {
     const user = await User.findOne({email: req.body.email});
-    const validPassword = User.findOne({password: req.body.password});
+    const validPassword = await User.findOne({password: req.body.password});
     if(!user) {
         return res.status(400).json({error: 'Usuario no encontrado'});
     }else{
