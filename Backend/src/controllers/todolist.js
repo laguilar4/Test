@@ -1,28 +1,18 @@
-const comidaCtrl ={};
-const Comida = require('../models/Comidas');
+const todoCtrl ={};
+const Todol = require('../models/todolist');
 
-comidaCtrl.getComidas = async (req,res) => {
-    const comidas = await Comida.find()
-    res.json(comidas);
+todoCtrl.getList = async (req,res) => {
+    const lista = await Todol.find()
+    res.json(lista);
 };
-comidaCtrl.createComida = async (req,res) => {
-    const newComida= new Comida(req.body);
-    await newComida.save();
-    res.send({message: 'Comida creada'});
+todoCtrl.createList = async (req,res) => {
+    const newList= new Todol(req.body);
+    await newList.save();
+    res.send({message: 'Lista creada'});
 };
-comidaCtrl.getComida = async (req,res) => {
-    
-    const comida = await Comida.findById(req.params.id);
-    res.send(comida);
-    
-};
-comidaCtrl.editComidas = async (req,res) => {
-    await Comida.findByIdAndUpdate(req.params.id, req.body);
-    res.json({status: 'Comida actualizada'});
-};
-comidaCtrl.deleteComidas = async (req,res) => {
-    await Comida.findByIdAndDelete(req.params.id);
-    res.json({status: 'Comida eliminada'});
+todoCtrl.deleteList = async (req,res) => {
+    await Todol.findByIdAndDelete(req.params.id);
+    res.json({status: 'Lista eliminada'});
 };
 
-module.exports = comidaCtrl;
+module.exports = todoCtrl;

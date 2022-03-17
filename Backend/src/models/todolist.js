@@ -12,15 +12,13 @@ const toDoListSchema= new Schema(
     },
     fechavenc: {
         type: Date, 
-        required:true
+        required:false
     },
     terminada: {
         type: String, 
-        required:false
+        required:false,
+        default: "N"
     }
-},{
-    timestamps:true,
-    versionKey:false
 },{ 
     collection: 'data' 
 })

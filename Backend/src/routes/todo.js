@@ -1,18 +1,9 @@
-/*
 const {Router} = require('express');
-const todolistCtrl = require('..controllers/')
+const todolistCtrl = require('../controllers/todolist')
 const router = Router();
 
+router.get('/', todolistCtrl.getList);
 
-router.get('/', comidasCtrl.getComidas);
-
-router.post('/', comidasCtrl.createComida);
-
-router.get('/:id', comidasCtrl.getComida);
-
-router.put('/:id', comidasCtrl.editComidas);
-
-router.delete('/:id', comidasCtrl.deleteComidas);
+router.post('/', todolistCtrl.createList);
 
 module.exports = router;
-*/
