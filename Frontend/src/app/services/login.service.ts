@@ -4,12 +4,13 @@ import { HttpClient } from "@angular/common/http";
 import { Router } from '@angular/router';
 import { user } from '../interfaces/login';
 import { map } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
   URL_API = environment.baseUrl;
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private jwtHelper : JwtHelperService) { }
   datauser : user[] | any;
 
   async login(credentials: user){
@@ -17,8 +18,24 @@ export class LoginService {
     map((resp: any) => 
     {
       const { token } = resp['data'];
-      console.log(token);
+      localStorage.setItem('user_token',token);
+      const { role } =  this.jwtHelper.decodeToken(token);
+      console.log(role);
+      if(role == 'ADMIN'){
+      this.router.navigate(['adminhome']);
+      }else if(role == 'CLIENT'){
+      this.router.navigate(['clienthome']);
+      }
+      
     }
     ));
+  }
+
+  isAuth():boolean{
+    const token = localStorage.getItem('user_token') || undefined;
+    if(this.jwtHelper.isTokenExpired(token) || !localStorage.getItem('user_token')){
+      return false;
+    }
+    return true;
   }
 }

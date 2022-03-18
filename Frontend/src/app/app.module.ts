@@ -11,7 +11,7 @@ import { ClienthomeComponent } from './components/clienthome/clienthome.componen
 import { LoginComponent } from './components/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { JwtHelperService, JWT_OPTIONS }  from '@auth0/angular-jwt';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { PortalModule } from '@angular/cdk/portal';
@@ -45,6 +45,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { NavComponent } from './nav/nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
 
 const materialModules = [
   CdkTreeModule,
@@ -86,7 +88,8 @@ const materialModules = [
     AppComponent,
     AdminhomeComponent,
     ClienthomeComponent,
-    LoginComponent
+    LoginComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
@@ -97,11 +100,18 @@ const materialModules = [
     FormsModule,
     ReactiveFormsModule,
     materialModules,
-    FlexLayoutModule 
+    FlexLayoutModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule 
   ],
   providers: [{
     provide:HTTP_INTERCEPTORS, useClass:SpinnerInterceptor, multi:true
-  }],
+  }, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+  JwtHelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
