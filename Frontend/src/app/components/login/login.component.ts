@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 import {FormBuilder,FormControl,FormGroup,Validators,FormArray} from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -8,7 +9,7 @@ import {FormBuilder,FormControl,FormGroup,Validators,FormArray} from '@angular/f
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public fb: FormBuilder, private loginSVC: LoginService) { }
+  constructor(public fb: FormBuilder, private loginSVC: LoginService, private toastr : ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
       }, 
       err => 
       {
-
+        this.toastr.error('Hubo un error al iniciar sesion.Verifique que haya ingresado bien sus datos','Error!');
       });
   }
 

@@ -19,7 +19,7 @@ export class LoginService {
     map((resp: any) => 
     {
       const { token } = resp['data'];
-      localStorage.setItem('user_token',token);
+      localStorage.setItem('auth-token',token);
       const { role } =  this.jwtHelper.decodeToken(token);
       this.userRole = role;
       console.log(role);
@@ -34,8 +34,8 @@ export class LoginService {
   }
 
   isAuth():boolean{
-    const token = localStorage.getItem('user_token') || undefined;
-    if(this.jwtHelper.isTokenExpired(token) || !localStorage.getItem('user_token')){
+    const token = localStorage.getItem('auth-token') || undefined;
+    if(this.jwtHelper.isTokenExpired(token) || !localStorage.getItem('auth-token')){
       return false;
     }
     return true;

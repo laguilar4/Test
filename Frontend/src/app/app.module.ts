@@ -47,6 +47,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NavComponent } from './nav/nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
+import { CreatelistComponent } from './components/createlist/createlist.component';
+import { ReadlistComponent } from './components/readlist/readlist.component';
+import { ToastrModule } from 'ngx-toastr';
 
 const materialModules = [
   CdkTreeModule,
@@ -89,7 +92,9 @@ const materialModules = [
     AdminhomeComponent,
     ClienthomeComponent,
     LoginComponent,
-    NavComponent
+    NavComponent,
+    CreatelistComponent,
+    ReadlistComponent
   ],
   imports: [
     BrowserModule,
@@ -106,7 +111,8 @@ const materialModules = [
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule 
+    MatListModule,
+    ToastrModule.forRoot()
   ],
   providers: [{
     provide:HTTP_INTERCEPTORS, useClass:SpinnerInterceptor, multi:true
